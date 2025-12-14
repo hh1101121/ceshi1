@@ -23,9 +23,9 @@ services:
       - pansou-network # 加入自定义网络
     environment:
       # 基础配置
-      - DOMAIN=localhost
+      - DOMAIN=0.0.0.0
       - PANSOU_PORT=8888
-      - PANSOU_HOST=127.0.0.1
+      - PANSOU_HOST=0.0.0.0
 
       # 数据目录配置（统一在/app/data下）
       - CACHE_PATH=/app/data/cache
@@ -105,4 +105,4 @@ services:
     #      - ./data:/app/data
     # 启动时确保目录可写（解决 SQLite 常见的 Permission denied 错误）
     environment:
-      - ZJ_FUWU_QI_URL=http://pansou:8001
+      - ZJ_FUWU_QI_URL=http://pansou:8888
