@@ -1,4 +1,4 @@
-from baidu_api.baidu_api import Network
+from utils.baidu_api.baidu_api import Network
 import functools
 import os
 from yml_utils.yml_operation import YmlOperation
