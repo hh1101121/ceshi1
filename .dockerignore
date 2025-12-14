@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.git
+# 不要把本地的 sqlite 数据库传上去，我们要在服务器上生成新的
+db.sqlite3
+data/db.sqlite3

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小Z搜索</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>小Z搜索</h1>
+
+    <!-- 搜索区域 -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="请输入搜索关键词" class="search-input">
+        <select id="cloudType" class="type-select">
+            <option value="baidu">百度网盘</option>
+            <option value="quark">夸克网盘</option>
+        </select>
+        <div class="search-controls">
+            <button id="searchBtn" class="search-btn">搜索</button>
+            <button id="checkValidityBtn" class="check-validity-btn">检查当前页面链接有效性</button>
+        </div>
+    </div>
+
+    <!-- 结果列表 -->
+    <div id="resultsContainer" class="results-container">
+        <!-- 搜索结果将在这里显示 -->
+    </div>
+
+    <!-- 分页组件 -->
+    <div id="pagination" class="pagination">
+        <!-- 分页按钮将在这里显示 -->
+    </div>
+</div>
+
+<script src="/static/js/search.js"></script>
+</body>
+</html>

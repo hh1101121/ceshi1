@@ -1,0 +1,640 @@
+/* 基础样式重置 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+    min-height: 100vh;
+}
+
+/* 搜索控制区域 - 将按钮放在一行 */
+.search-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+/* 搜索按钮 */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 搜索区域美化 */
+.search-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.search-input, .type-select {
+    padding: 15px 20px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.search-input:focus, .type-select:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.5);
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+}
+
+.search-btn {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #00c9ff, #92fe9d);
+    border: none;
+    border-radius: 30px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    white-space: nowrap;
+
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.search-btn:active {
+    transform: translateY(0);
+}
+
+/* 响应式搜索区域 */
+@media (min-width: 768px) {
+    .search-container {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+    .search-controls {
+        flex-direction: row;
+        gap: 8px;
+    }
+    .search-btn,
+    .check-validity-btn {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .result-image img {
+        width: 65px;
+        height: 80px;
+    }
+    .search-input {
+        flex: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-input, .type-select {
+        margin-bottom: 0;
+    }
+}
+
+/* 检查有效性按钮 - 独立放置 */
+.check-validity-container {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.check-validity-btn {
+     padding: 12px 20px;
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+    white-space: nowrap;
+
+}
+
+.check-validity-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+.check-validity-btn:active {
+    transform: translateY(0);
+}
+
+/* 结果列表容器 */
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* 自定义滚动条 */
+.results-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.results-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.results-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+.results-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #5a6fd8, #6a4190);
+}
+
+/* 搜索结果项 */
+.result-item {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid #667eea;
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+}
+
+.result-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* 结果项头部（图片和信息） */
+.result-header {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.result-image {
+    flex-shrink: 0;
+}
+
+.result-image img {
+    width: 60px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.result-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 80px;
+}
+
+.result-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.result-datetime {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+/* 获取链接按钮 */
+.get-link-btn {
+    align-self: flex-start;
+    margin-left: 15px;
+    padding: 8px 16px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.get-link-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.get-link-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 无效结果样式 */
+.invalid-result {
+    opacity: 0.7;
+    border-left-color: #bdc3c7;
+    background: #f8f9fa;
+}
+
+.invalid-result .result-name {
+    text-decoration: line-through;
+    color: #95a5a6;
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.page-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+.page-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.page-info {
+    font-weight: 500;
+    color: #2c3e50;
+    padding: 10px 15px;
+}
+
+/* 管理页面样式 */
+.login-container, .profile-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.password-input, .cookie-textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0 25px 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.password-input:focus, .cookie-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.cookie-textarea {
+    height: 120px;
+    resize: vertical;
+    font-family: monospace;
+}
+
+.login-btn, .update-btn, .logout-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-btn {
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+    color: white;
+}
+
+.update-btn {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+    color: white;
+}
+
+.logout-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.login-btn:hover, .update-btn:hover, .logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.login-btn:active, .update-btn:active, .logout-btn:active {
+    transform: translateY(0);
+}
+
+.cookie-section {
+    margin-bottom: 30px;
+    text-align: left;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.cookie-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+/* 模态框样式 */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    margin: 10% auto;
+    padding: 30px;
+    border: none;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+/* 模态框按钮容器 */
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 复制按钮样式 */
+.copy-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #1abc9c, #16a085);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(26, 188, 156, 0.3);
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4);
+}
+
+.modal-close-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.modal-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* 等待弹窗样式 */
+.loading-modal {
+    display: block;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+}
+
+.loading-modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: 15% auto;
+    padding: 40px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.spinner {
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .results-container {
+        max-height: calc(100vh - 300px);
+    }
+
+    .result-item {
+        flex-direction: column;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .result-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .result-image img {
+        width: 80px;
+        height: 100px;
+    }
+
+    .result-name {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .result-datetime {
+        text-align: center;
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .result-info {
+        align-items: center;
+        min-height: auto;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 15% auto;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .copy-btn, .modal-close-btn {
+        width: 100%;
+    }
+
+    .get-link-btn {
+        align-self: center;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .result-item {
+        padding: 15px;
+    }
+
+    .result-image img {
+        width: 70px;
+        height: 90px;
+    }
+
+    .search-container {
+        padding: 20px;
+    }
+
+    .login-container, .profile-container {
+        padding: 25px;
+    }
+
+    .result-name {
+        font-size: 16px;
+    }
+}

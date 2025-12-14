@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>管理后台</h1>
+
+        <!-- 登录表单 -->
+        <div id="loginContainer" class="login-container">
+            <h2>管理员登录</h2>
+            <input type="password" id="adminPassword" placeholder="请输入管理员密码" class="password-input">
+            <button id="loginBtn" class="login-btn">登录</button>
+        </div>
+
+        <!-- 个人中心 -->
+        <div id="profileContainer" class="profile-container hidden">
+            <h2>个人中心</h2>
+
+            <!-- 百度Cookie设置 -->
+            <div class="cookie-section">
+                <label>百度网盘Cookie:</label>
+                <textarea id="baiduCookie" placeholder="请输入百度网盘Cookie" class="cookie-textarea"></textarea>
+                <button id="updateBaiduBtn" class="update-btn">更新百度Cookie</button>
+            </div>
+
+            <!-- 夸克Cookie设置 -->
+            <div class="cookie-section">
+                <label>夸克网盘Cookie:</label>
+                <textarea id="quarkCookie" placeholder="请输入夸克网盘Cookie" class="cookie-textarea"></textarea>
+                <button id="updateQuarkBtn" class="update-btn">更新夸克Cookie</button>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn">退出登录</button>
+        </div>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>
