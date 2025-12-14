@@ -18,7 +18,7 @@ services:
     labels:
       - "autoheal=true"  # 标记此容器允许被autoheal重启
     ports:
-      - "8001:8001"
+      - "8001:8888"
     networks:
       - pansou-network # 加入自定义网络
     environment:
